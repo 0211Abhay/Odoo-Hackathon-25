@@ -1,0 +1,32 @@
+.textarea {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  background: #f8f8f8;
+  transition: all 0.2s ease;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #6b5b95;
+  background: white;
+  box-shadow: 0 0 0 2px rgba(107, 91, 149, 0.1);
+}
+
+.textarea::placeholder {
+  color: #999;
+}
+
+.textarea-error {
+  border-color: #e74c3c;
+}
+
+.textarea-error:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1);
+}

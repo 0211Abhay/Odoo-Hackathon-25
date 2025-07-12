@@ -1,0 +1,143 @@
+
+.profile-page {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.profile-info h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin: 20px 0 8px 0;
+}
+
+.profile-info .location {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.skills-section h2,
+.availability-section h2,
+.visibility-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 20px;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.availability-section p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.visibility-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.visibility-info h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2d2d2d;
+  margin-bottom: 4px;
+}
+
+.visibility-info p {
+  color: #888;
+  font-size: 14px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #6b5b95;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 20px;
+  }
+  
+  .profile-header {
+    margin-bottom: 40px;
+  }
+  
+  .profile-info h1 {
+    font-size: 28px;
+  }
+  
+  .visibility-control {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

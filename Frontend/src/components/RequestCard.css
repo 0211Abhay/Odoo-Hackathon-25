@@ -1,0 +1,68 @@
+
+.request-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.request-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.request-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.request-info {
+  flex: 1;
+}
+
+.request-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 4px;
+}
+
+.request-date {
+  font-size: 14px;
+  margin: 0;
+}
+
+.request-actions {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status-indicator.accepted {
+  background: #27ae60;
+}
+
+.status-indicator.rejected {
+  background: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .request-card {
+    padding: 16px;
+  }
+  
+  .request-card-content {
+    gap: 12px;
+  }
+  
+  .request-name {
+    font-size: 16px;
+  }
+}

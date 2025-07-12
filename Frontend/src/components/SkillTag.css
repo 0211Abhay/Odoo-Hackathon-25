@@ -1,0 +1,35 @@
+
+.skill-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.skill-tag-filled {
+  background: #e8e5f0;
+  color: #6b5b95;
+  border: 1px solid #e8e5f0;
+}
+
+.skill-tag-outlined {
+  background: transparent;
+  color: #6b5b95;
+  border: 1px solid #6b5b95;
+}
+
+.skill-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-tag-filled:hover {
+  background: #ddd6ed;
+  border-color: #ddd6ed;
+}
+
+.skill-tag-outlined:hover {
+  background: rgba(107, 91, 149, 0.1);
+}
