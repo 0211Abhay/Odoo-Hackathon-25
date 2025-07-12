@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios'; // ← make sure this is imported
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -11,12 +11,26 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Simulate login
-    navigate('/home');
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+        { email, password },
+        { withCredentials: true } // <-- VERY IMPORTANT
+      );
+
+      console.log(response.data); // Optional: for debugging
+
+      // If login succeeds
+      navigate('/home');
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    }
   };
 
   return (
@@ -25,6 +39,7 @@ const LoginPage = () => {
       <div className="login-container fade-in">
         <div className="login-form">
           <h1 className="login-title">Welcome back</h1>
+          {error && <p className="error-message">{error}</p>}
           <form onSubmit={handleLogin}>
             <div className="form-group">
               <label htmlFor="email">Email</label>

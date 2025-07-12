@@ -3,11 +3,18 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
+
 import './RegisterPage.css';
 
 const RegisterPage = () => {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    fullName: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -32,8 +39,8 @@ const RegisterPage = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    if (!formData.username.trim()) {
+      newErrors.username = 'Full name is required';
     }
 
     if (!formData.email.trim()) {
@@ -57,17 +64,35 @@ const RegisterPage = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
-
+    console.log(formData)
+  
     if (Object.keys(newErrors).length === 0) {
-      console.log('Registration data:', formData);
-      // Handle registration logic here
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
+          formData
+        );
+  
+        console.log('✅ Registration successful:', response.data);
+  
+        // ✅ Navigate to login page
+        navigate('/login');
+  
+      } catch (error) {
+        console.error('❌ Registration failed:', error.response?.data || error.message);
+  
+        if (error.response?.data?.errors) {
+          setErrors(error.response.data.errors);
+        }
+      }
     } else {
       setErrors(newErrors);
     }
   };
+  
 
   return (
     <div className="register-page">
@@ -83,13 +108,13 @@ const RegisterPage = () => {
             <div className="form-group">
               <Input
                 type="text"
-                name="fullName"
+                name="username"
                 placeholder="Full Name"
-                value={formData.fullName}
+                value={formData.username}
                 onChange={handleInputChange}
-                error={!!errors.fullName}
+                error={!!errors.username}
               />
-              {errors.fullName && <span className="error-message">{errors.fullName}</span>}
+              {errors.username && <span className="error-message">{errors.username}</span>}
             </div>
 
             <div className="form-group">

@@ -4,12 +4,15 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const path = require("path");
+const cookieParser = require('cookie-parser');
+
 
 // const passport = require("passport");
 const cookieSession = require("cookie-session");
 // const passportStrategy = require("./passport");
 const authRoute = require("./middleware/auth");
 const app = express();
+app.use(cookieParser());
 
 // Database Connection
 const dbConfig = require("./config/db.config");

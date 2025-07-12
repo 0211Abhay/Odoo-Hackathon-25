@@ -46,29 +46,39 @@ const verifyMail = async (req, res) => {
  * Authenticates a user.
  */
 const login = async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+  
+      const user = await userService.loginUser(req.body.email, req.body.password);
+      const token = jwt.sign(
+        { id: user.user_id, is_admin: user.is_admin },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+  
+      // Set token as a cookie
+      res.cookie("token", token, {
+        httpOnly: true,        // Prevents client-side JS from accessing the cookie
+        secure: process.env.NODE_ENV === "production", // Use only in HTTPS in production
+        sameSite: "Strict",    // Prevents CSRF
+        maxAge: 60 * 60 * 1000 // 1 hour
+      });
+  
+      // Optionally still save in session
+      req.session.token = token;
+  
+      return res.status(200).json({
+        message: "Login Successfully",
+        user,
+      });
+    } catch (error) {
+      return res.status(401).json({ message: error.message });
     }
-
-    const user = await userService.loginUser(req.body.email, req.body.password);
-    const token = jwt.sign(
-      { id: user.user_id, is_admin: user.is_admin },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    req.session.token = token;
-    return res.status(200).json({
-      message: "Login Successfully",
-      token,
-      user,
-    });
-  } catch (error) {
-    return res.status(401).json({ message: error.message });
-  }
-};
+  };
+  
 
 /**
  * Retrieves the logged-in user's profile.
