@@ -66,6 +66,9 @@ app.use("/api/user", userRouter);
 // app.use("/api/task", taskRouter);
 // app.use("/api/document", documentRouter);
 
+// Register API routes
+app.use("/api/user", require("./routes/user_profile.routes"));
+
 // Start the server
 app.get("/", (req, res) => {
   res.send("Welcome to the Skill Connect API!");
