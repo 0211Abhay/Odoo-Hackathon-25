@@ -31,8 +31,6 @@ const upload = multer({
 
 
 router.post("/register", upload.single('image'), signUpValidation, userController.register);
-router.post("/excel", userController.createEmployeeFromExcel);
-router.get("/get_employees", userController.getEmployees);
 router.post("/login", loginValidation, userController.login);
 router.get('/get-token', userController.getSessionData);
 router.get('/get-user', auth.isAuthorize, userController.getUser);

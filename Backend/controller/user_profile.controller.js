@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const userService = require("../service/user.service");
+const userService = require("../service/user_profile.service");
 const path = require("path");
 const fs = require("fs");
 const model = require("../helper/db.helper");

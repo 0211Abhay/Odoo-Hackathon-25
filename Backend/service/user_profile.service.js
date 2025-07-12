@@ -21,7 +21,7 @@ class UserService {
     const randomToken = randomString.generate();
 
     const credentials = await Credentials.create({
-      username: userData.user_name,
+      full_name: userData.full_name,
       email: userData.email.toLowerCase(),
       password_hash: hash,
       role: userData.role || "user",
@@ -31,7 +31,7 @@ class UserService {
 
     await UserProfile.create({
       user_id: credentials.user_id,
-      full_name: userData.name,
+      full_name: userData.full_name,
       location: userData.district,
       profile_photo_url: filename ? "images/" + filename : null,
       github_url: userData.github_url || null,

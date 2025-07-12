@@ -35,6 +35,7 @@ async function initialize() {
   db.admin_actions = require("../model/admin_actions.model")(sequelize);
   db.banned_users = require("../model/banned_users.model")(sequelize);
   db.platform_messages = require("../model/platform_messages.model")(sequelize); // standalone
+  db.password_reset = require("../model/password_reset.model")(sequelize);
 
   // 🔗 Define Model Associations
 
