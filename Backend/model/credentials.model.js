@@ -19,13 +19,13 @@ function model(sequelize) {
         },
         username: {
             type: DataTypes.STRING(50),
-            allowNull: false,
-            unique: true
+            allowNull: false
+            // unique constraint moved to indexes below
         },
         email: {
             type: DataTypes.STRING(100),
-            allowNull: false,
-            unique: true
+            allowNull: false
+            // unique constraint moved to indexes below
         },
         password_hash: {
             type: DataTypes.STRING(255),
@@ -47,7 +47,17 @@ function model(sequelize) {
 
     const options = {
         tableName: 'credentials',
-        timestamps: false
+        timestamps: false,
+        indexes: [
+            {
+                unique: true,
+                fields: ['username']
+            },
+            {
+                unique: true,
+                fields: ['email']
+            }
+        ]
     };
 
     return sequelize.define("User", attributes, options);
