@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -48,6 +48,38 @@ const EditProfilePage = () => {
     'Weekends and evenings'
   ];
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    // Fetch profile data
+    fetch('/api/user/get-user', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.user) {
+          setProfileData({
+            fullName: data.user.full_name || '',
+            email: data.user.email || '',
+            location: data.user.location || '',
+            bio: data.user.bio || '',
+            availability: data.user.availability || '',
+            profileImage: data.user.profile_photo_url || ''
+          });
+        }
+      });
+    // Fetch user skills
+    fetch('/api/user/user/skills', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setOfferedSkills((data.offeredSkills || []).map(s => s.skill_name));
+        setWantedSkills((data.wantedSkills || []).map(s => s.skill_name));
+      });
+    // Fetch all skills for modal (optional, if needed)
+    // fetch('/api/user/skills').then(...)
+  }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfileData(prev => ({
@@ -73,13 +105,41 @@ const EditProfilePage = () => {
   };
 
   const handleSave = () => {
-    console.log('Profile updated:', {
-      ...profileData,
-      offeredSkills,
-      wantedSkills
-    });
-    // Handle save logic here
-    navigate('/profile');
+    const token = localStorage.getItem('token');
+    // Update profile
+    fetch('/api/user/update_profile', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        full_name: profileData.fullName,
+        email: profileData.email,
+        location: profileData.location,
+        bio: profileData.bio,
+        availability: profileData.availability
+      })
+    })
+      .then(res => res.json())
+      .then(() => {
+        // Update skills
+        fetch('/api/user/user/skills', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            offeredSkills,
+            wantedSkills
+          })
+        })
+          .then(res => res.json())
+          .then(() => {
+            navigate('/profile');
+          });
+      });
   };
 
   const handleCancel = () => {
