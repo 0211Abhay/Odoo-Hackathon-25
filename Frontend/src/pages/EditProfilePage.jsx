@@ -8,6 +8,7 @@ import TextArea from '../components/TextArea';
 import Select from '../components/Select';
 import Avatar from '../components/Avatar';
 import SkillTag from '../components/SkillTag';
+import SkillSelectionModal from '../components/SkillSelectionModal';
 import './EditProfilePage.css';
 
 const EditProfilePage = () => {
@@ -36,8 +37,8 @@ const EditProfilePage = () => {
     'Marketing Strategy'
   ]);
 
-  const [newOfferedSkill, setNewOfferedSkill] = useState('');
-  const [newWantedSkill, setNewWantedSkill] = useState('');
+  const [showOfferedSkillsModal, setShowOfferedSkillsModal] = useState(false);
+  const [showWantedSkillsModal, setShowWantedSkillsModal] = useState(false);
 
   const availabilityOptions = [
     'Weekdays',
@@ -55,18 +56,12 @@ const EditProfilePage = () => {
     }));
   };
 
-  const addOfferedSkill = () => {
-    if (newOfferedSkill.trim() && !offeredSkills.includes(newOfferedSkill.trim())) {
-      setOfferedSkills([...offeredSkills, newOfferedSkill.trim()]);
-      setNewOfferedSkill('');
-    }
+  const handleOfferedSkillsSave = (newSkills) => {
+    setOfferedSkills(newSkills);
   };
 
-  const addWantedSkill = () => {
-    if (newWantedSkill.trim() && !wantedSkills.includes(newWantedSkill.trim())) {
-      setWantedSkills([...wantedSkills, newWantedSkill.trim()]);
-      setNewWantedSkill('');
-    }
+  const handleWantedSkillsSave = (newSkills) => {
+    setWantedSkills(newSkills);
   };
 
   const removeOfferedSkill = (skillToRemove) => {
@@ -102,7 +97,7 @@ const EditProfilePage = () => {
 
         <div className="edit-profile-content">
           <div className="profile-image-section">
-            <Avatar 
+            <Avatar
               src={profileData.profileImage}
               size="large"
               alt={profileData.fullName}
@@ -136,7 +131,7 @@ const EditProfilePage = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="form-group">
                 <label>Location</label>
                 <Input
@@ -171,22 +166,20 @@ const EditProfilePage = () => {
 
             <div className="form-section">
               <h2>Skills Offered</h2>
-              <div className="skills-input">
-                <Input
-                  value={newOfferedSkill}
-                  onChange={(e) => setNewOfferedSkill(e.target.value)}
-                  placeholder="Add a skill you can offer"
-                  onKeyPress={(e) => e.key === 'Enter' && addOfferedSkill()}
-                />
-                <Button size="small" onClick={addOfferedSkill}>
-                  Add
+              <div className="skills-section-header">
+                <p>Select skills you can offer to others</p>
+                <Button
+                  size="small"
+                  onClick={() => setShowOfferedSkillsModal(true)}
+                >
+                  Add Skills
                 </Button>
               </div>
               <div className="skills-grid">
                 {offeredSkills.map((skill, index) => (
                   <div key={index} className="skill-item">
                     <SkillTag skill={skill} />
-                    <button 
+                    <button
                       className="remove-skill"
                       onClick={() => removeOfferedSkill(skill)}
                     >
@@ -194,27 +187,28 @@ const EditProfilePage = () => {
                     </button>
                   </div>
                 ))}
+                {offeredSkills.length === 0 && (
+                  <div className="no-skills">No skills added yet</div>
+                )}
               </div>
             </div>
 
             <div className="form-section">
               <h2>Skills Wanted</h2>
-              <div className="skills-input">
-                <Input
-                  value={newWantedSkill}
-                  onChange={(e) => setNewWantedSkill(e.target.value)}
-                  placeholder="Add a skill you want to learn"
-                  onKeyPress={(e) => e.key === 'Enter' && addWantedSkill()}
-                />
-                <Button size="small" onClick={addWantedSkill}>
-                  Add
+              <div className="skills-section-header">
+                <p>Select skills you want to learn from others</p>
+                <Button
+                  size="small"
+                  onClick={() => setShowWantedSkillsModal(true)}
+                >
+                  Add Skills
                 </Button>
               </div>
               <div className="skills-grid">
                 {wantedSkills.map((skill, index) => (
                   <div key={index} className="skill-item">
                     <SkillTag skill={skill} variant="outlined" />
-                    <button 
+                    <button
                       className="remove-skill"
                       onClick={() => removeWantedSkill(skill)}
                     >
@@ -222,6 +216,9 @@ const EditProfilePage = () => {
                     </button>
                   </div>
                 ))}
+                {wantedSkills.length === 0 && (
+                  <div className="no-skills">No skills added yet</div>
+                )}
               </div>
             </div>
 
@@ -236,6 +233,22 @@ const EditProfilePage = () => {
           </div>
         </div>
       </div>
+
+      <SkillSelectionModal
+        isOpen={showOfferedSkillsModal}
+        onClose={() => setShowOfferedSkillsModal(false)}
+        onSave={handleOfferedSkillsSave}
+        existingSkills={offeredSkills}
+        title="Select Skills to Offer"
+      />
+
+      <SkillSelectionModal
+        isOpen={showWantedSkillsModal}
+        onClose={() => setShowWantedSkillsModal(false)}
+        onSave={handleWantedSkillsSave}
+        existingSkills={wantedSkills}
+        title="Select Skills to Learn"
+      />
     </div>
   );
 };
