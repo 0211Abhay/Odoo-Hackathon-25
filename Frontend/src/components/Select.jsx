@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import './Select.css';
 
-const Select = ({ 
-  placeholder, 
-  options = [], 
-  value, 
-  onChange, 
+const Select = ({
+  placeholder,
+  options = [],
+  value,
+  onChange,
   className = '',
-  ...props 
+  ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,29 +25,32 @@ const Select = ({
 
   return (
     <div className={selectClass} {...props}>
-      <div 
+      <div
         className="select-trigger"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className={`select-value ${!value ? 'select-placeholder' : ''}`}>
-          {value || placeholder}
+          {typeof value === 'string' ? value : placeholder}
         </span>
         <span className={`select-arrow ${isOpen ? 'select-arrow-up' : ''}`}>
           ▼
         </span>
       </div>
-      
+
       {isOpen && (
         <div className="select-dropdown">
-          {options.map((option, index) => (
-            <div
-              key={index}
-              className={`select-option ${value === option ? 'select-option-selected' : ''}`}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </div>
-          ))}
+          {options.map((option, index) => {
+            const optionText = typeof option === 'string' ? option : String(option);
+            return (
+              <div
+                key={index}
+                className={`select-option ${value === option ? 'select-option-selected' : ''}`}
+                onClick={() => handleOptionClick(option)}
+              >
+                {optionText}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

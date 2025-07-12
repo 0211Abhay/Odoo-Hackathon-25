@@ -1,0 +1,255 @@
+.skill-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.skill-modal-content {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 900px;
+    height: 85vh;
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px 0 32px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.skill-modal-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin: 0;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.skill-modal-body {
+    padding: 32px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.category-section,
+.search-section {
+    margin-bottom: 24px;
+}
+
+.category-section label,
+.search-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d2d2d;
+    margin-bottom: 8px;
+}
+
+.skills-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.available-skills h3,
+.selected-skills h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 16px;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.skill-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.skill-item:hover {
+    transform: translateY(-2px);
+}
+
+.skill-item.selected {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+
+.selected-skills-grid {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.selected-skill-item {
+    position: relative;
+    display: inline-block;
+}
+
+.selected-skill-item:last-child {
+    margin-bottom: 0;
+}
+
+.remove-skill {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.selected-skill-item:hover .remove-skill {
+    opacity: 1;
+}
+
+.loading {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+.no-results,
+.no-selected {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+    grid-column: 1 / -1;
+}
+
+.skill-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 24px 32px;
+    border-top: 1px solid #eee;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .skill-modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+
+    .skill-modal-header {
+        padding: 20px 24px 0 24px;
+    }
+
+    .skill-modal-body {
+        padding: 24px;
+    }
+
+    .skill-modal-header h2 {
+        font-size: 20px;
+    }
+
+    .skills-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .skill-modal-footer {
+        padding: 20px 24px;
+        flex-direction: column;
+    }
+
+    .skill-modal-footer button {
+        width: 100%;
+    }
+}
