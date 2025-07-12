@@ -21,20 +21,18 @@ module.exports = function model(sequelize) {
 
         /**
          * ID of the user who initiated the request.
-         * References the user offering a skill.
          */
         requester_id: {
             type: DataTypes.INTEGER,
-            allowNull: true, // can be changed to false if required
+            allowNull: true,
         },
 
         /**
          * ID of the user receiving the request.
-         * References the user whose skill is being requested.
          */
         receiver_id: {
             type: DataTypes.INTEGER,
-            allowNull: true, // can be changed to false if required
+            allowNull: true,
         },
 
         /**
@@ -54,9 +52,15 @@ module.exports = function model(sequelize) {
         },
 
         /**
+         * Optional message with the swap request.
+         */
+        msg: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+
+        /**
          * Current status of the swap request.
-         * Can be one of: 'Pending', 'Accepted', 'Rejected', 'Cancelled'.
-         * Defaults to 'Pending'.
          */
         status: {
             type: DataTypes.ENUM("Pending", "Accepted", "Rejected", "Cancelled"),
@@ -65,7 +69,6 @@ module.exports = function model(sequelize) {
 
         /**
          * Date when the request was made.
-         * Automatically set to the current timestamp.
          */
         request_date: {
             type: DataTypes.DATE,
@@ -74,8 +77,8 @@ module.exports = function model(sequelize) {
     };
 
     const options = {
-        tableName: "swap_requests", // Name of the table in the database
-        timestamps: false, // Disables createdAt and updatedAt fields
+        tableName: "swap_requests",
+        timestamps: false,
     };
 
     return sequelize.define("SwapRequest", attributes, options);
