@@ -125,7 +125,7 @@ const ProfilePage = () => {
       <div className="profile-container fade-in">
         <div className="profile-header">
           <Avatar 
-            src="/lovable-uploads/f8712c35-5168-401c-b0c0-c235f3d4cd57.png"
+            src="../assets/6833605.png"
             size="large"
             alt="Sophia Bennett"
           />

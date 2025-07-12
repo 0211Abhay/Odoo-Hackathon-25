@@ -32,7 +32,7 @@ const ExplorePage = () => {
     {
       id: 1,
       name: 'Sophia Carter',
-      image: '/lovable-uploads/fe21ecbd-8fcf-4177-9f3f-b5fb88afb004.png',
+      image: '../assets/6833605.png',
       skills: ['Graphic Design', 'UI/UX Design'],
       seeking: ['Web Development', 'Data Analysis'],
       availability: 'Weekends',
@@ -41,7 +41,7 @@ const ExplorePage = () => {
     {
       id: 2,
       name: 'Ethan Bennett',
-      image: '/lovable-uploads/fe21ecbd-8fcf-4177-9f3f-b5fb88afb004.png',
+      image: '../assets/6833605.png',
       skills: ['Web Development', 'Mobile App Development'],
       seeking: ['Photography', 'Video Editing'],
       availability: 'Evenings',
@@ -50,7 +50,7 @@ const ExplorePage = () => {
     {
       id: 3,
       name: 'Olivia Hayes',
-      image: '/lovable-uploads/fe21ecbd-8fcf-4177-9f3f-b5fb88afb004.png',
+      image: '../assets/6833605.png',
       skills: ['Content Writing', 'Copywriting'],
       seeking: ['Digital Marketing', 'SEO'],
       availability: 'Weekdays',
@@ -59,7 +59,7 @@ const ExplorePage = () => {
     {
       id: 4,
       name: 'Liam Foster',
-      image: '/lovable-uploads/fe21ecbd-8fcf-4177-9f3f-b5fb88afb004.png',
+      image: '../assets/6833605.png',
       skills: ['Photography', 'Video Editing'],
       seeking: ['Graphic Design', 'UI/UX Design'],
       availability: 'Flexible',
@@ -68,7 +68,7 @@ const ExplorePage = () => {
     {
       id: 5,
       name: 'Ava Mitchell',
-      image: '/lovable-uploads/fe21ecbd-8fcf-4177-9f3f-b5fb88afb004.png',
+      image: '../assets/6833605.png',
       skills: ['Digital Marketing', 'SEO'],
       seeking: ['Content Writing', 'Copywriting'],
       availability: 'Weekends',
