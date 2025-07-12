@@ -1,0 +1,209 @@
+.request-details-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+    padding: 20px;
+}
+
+.request-details-modal-content {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease-out;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.request-details-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px 0 32px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.request-details-modal-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin: 0;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.request-details-modal-body {
+    padding: 32px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.request-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.requester-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin: 0 0 8px 0;
+}
+
+.request-date {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.skills-exchange {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.skill-offer,
+.skill-desire {
+    flex: 1;
+    text-align: center;
+}
+
+.skill-offer h4,
+.skill-desire h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    margin: 0 0 12px 0;
+}
+
+.exchange-arrow {
+    font-size: 24px;
+    color: #6b5b95;
+    font-weight: bold;
+}
+
+.message-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin: 0 0 12px 0;
+}
+
+.message-content {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.message-content p {
+    color: #2d2d2d;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.request-details-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 24px 32px;
+    border-top: 1px solid #eee;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .request-details-modal-overlay {
+        padding: 10px;
+    }
+
+    .request-details-modal-content {
+        width: 100%;
+        margin: 0;
+    }
+
+    .request-details-modal-header {
+        padding: 20px 24px 0 24px;
+    }
+
+    .request-details-modal-body {
+        padding: 24px;
+    }
+
+    .request-details-modal-header h2 {
+        font-size: 20px;
+    }
+
+    .skills-exchange {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .exchange-arrow {
+        transform: rotate(90deg);
+    }
+
+    .request-details-modal-footer {
+        padding: 20px 24px;
+    }
+}

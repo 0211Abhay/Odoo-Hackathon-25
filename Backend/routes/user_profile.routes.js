@@ -39,4 +39,9 @@ router.put('/update_profile', upload.single('image'), updateProfileValidation, a
 router.post('/logout', userController.logout);
 router.delete('/delete_profile', auth.isAuthorize, userController.deleteProfile);
 
+// Skills endpoints for profile editing
+router.get('/user/skills', auth.isAuthorize, userController.getUserSkills);
+router.put('/user/skills', auth.isAuthorize, userController.updateUserSkills);
+router.get('/skills', userController.getAllSkills);
+
 module.exports = router;

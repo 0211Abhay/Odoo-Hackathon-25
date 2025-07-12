@@ -1,9 +1,9 @@
-.login-page {
+.register-page {
   min-height: 100vh;
   background-color: #fafafa;
 }
 
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   padding: 20px;
 }
 
-.login-form {
+.register-form {
   background: white;
   padding: 60px 40px;
   border-radius: 8px;
@@ -20,12 +20,22 @@
   max-width: 480px;
 }
 
-.login-title {
+.register-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.register-header h1 {
   font-size: 32px;
   font-weight: 600;
   color: #2d2d2d;
-  text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
+}
+
+.register-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
 }
 
 .form-group {
@@ -40,56 +50,43 @@
   margin-bottom: 8px;
 }
 
-.forgot-password {
-  margin-bottom: 32px;
-  text-align: left;
+.error-message {
+  color: rgb(235, 127, 128);
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
 }
 
-.forgot-password-link {
-  background: none;
-  border: none;
-  color: #888;
-  text-decoration: underline;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
-}
-
-.forgot-password-link:hover {
-  color: #6b5b95;
-}
-
-.login-footer {
+.register-footer {
   margin-top: 32px;
   text-align: center;
   padding-top: 24px;
   border-top: 1px solid #eee;
 }
 
-.login-footer p {
+.register-footer p {
   color: #666;
   font-size: 14px;
   margin: 0;
 }
 
-.register-link {
+.login-link {
   color: #6b5b95;
   text-decoration: none;
   font-weight: 500;
 }
 
-.register-link:hover {
+.login-link:hover {
   text-decoration: underline;
 }
 
 @media (max-width: 768px) {
-  .login-form {
+  .register-form {
     padding: 40px 24px;
     margin: 20px;
   }
 
-  .login-title {
+  .register-header h1 {
     font-size: 28px;
   }
 }

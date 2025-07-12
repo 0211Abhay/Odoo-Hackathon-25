@@ -185,6 +185,14 @@ async function initialize() {
     as: "BanningAdmin",
   });
 
+  // Add associations for skills
+  if (db.user_skills && db.skills) {
+    db.user_skills.belongsTo(db.skills, { foreignKey: 'skill_id', as: 'Skill' });
+  }
+  if (db.user_wanted_skills && db.skills) {
+    db.user_wanted_skills.belongsTo(db.skills, { foreignKey: 'skill_id', as: 'Skill' });
+  }
+
   // Sync models with database
   await sequelize
     .sync({ alter: true })

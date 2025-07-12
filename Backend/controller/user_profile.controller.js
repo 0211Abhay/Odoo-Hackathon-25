@@ -4,6 +4,10 @@ const { JWT_SECRET } = process.env;
 const userService = require("../service/user_profile.service");
 const path = require("path");
 const fs = require("fs");
+const model = require("../helper/db.helper");
+const UserSkills = model.user_skills;
+const UserWantedSkills = model.user_wanted_skills;
+const Skills = model.skills;
 
 /**
  * Registers a new user and profile.
@@ -245,6 +249,78 @@ const deleteProfile = async (req, res) => {
   }
 };
 
+/**
+ * Get the current user's offered and wanted skills
+ */
+const getUserSkills = async (req, res) => {
+  try {
+    const authtoken = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(authtoken, JWT_SECRET);
+    const user_id = decoded.id;
+
+    // Offered skills
+    const offered = await UserSkills.findAll({
+      where: { user_id },
+      include: [{ model: Skills, attributes: ["skill_id", "skill_name", "tag"] }],
+    });
+    // Wanted skills
+    const wanted = await UserWantedSkills.findAll({
+      where: { user_id },
+      include: [{ model: Skills, attributes: ["skill_id", "skill_name", "tag"] }],
+    });
+    res.status(200).json({
+      offeredSkills: offered.map((s) => s.Skill),
+      wantedSkills: wanted.map((s) => s.Skill),
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+/**
+ * Update the current user's offered and wanted skills
+ * Expects: { offeredSkills: [skill_id], wantedSkills: [skill_id] }
+ */
+const updateUserSkills = async (req, res) => {
+  try {
+    const authtoken = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(authtoken, JWT_SECRET);
+    const user_id = decoded.id;
+    const { offeredSkills, wantedSkills } = req.body;
+
+    // Remove all current skills
+    await UserSkills.destroy({ where: { user_id } });
+    await UserWantedSkills.destroy({ where: { user_id } });
+    // Add new offered skills
+    if (Array.isArray(offeredSkills)) {
+      await UserSkills.bulkCreate(
+        offeredSkills.map((skill_id) => ({ user_id, skill_id }))
+      );
+    }
+    // Add new wanted skills
+    if (Array.isArray(wantedSkills)) {
+      await UserWantedSkills.bulkCreate(
+        wantedSkills.map((skill_id) => ({ user_id, skill_id }))
+      );
+    }
+    res.status(200).json({ message: "Skills updated successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+/**
+ * Get all available skills
+ */
+const getAllSkills = async (req, res) => {
+  try {
+    const skills = await Skills.findAll({ attributes: ["skill_id", "skill_name", "tag"] });
+    res.status(200).json(skills);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   register,
   verifyMail,
@@ -257,4 +333,7 @@ module.exports = {
   logout,
   deleteProfile,
   getSessionData,
+  getUserSkills,
+  updateUserSkills,
+  getAllSkills,
 };

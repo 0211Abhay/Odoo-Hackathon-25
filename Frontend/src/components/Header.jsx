@@ -48,7 +48,7 @@ const Header = ({ showNavigation = false }) => {
               </div>
               <button className="notification-btn">🔔</button>
               <div className="user-avatar" onClick={() => navigate('/profile')}>
-                <img src="/lovable-uploads/f8712c35-5168-401c-b0c0-c235f3d4cd57.png" alt="User" />
+                <img src="../assets/6833605.png" alt="User" />
               </div>
             </div>
           </>
