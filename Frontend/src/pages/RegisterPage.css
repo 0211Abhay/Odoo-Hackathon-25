@@ -1,0 +1,82 @@
+
+.register-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.register-container {
+  background: white;
+  border-radius: 12px;
+  padding: 48px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 440px;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.register-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 8px;
+}
+
+.register-header p {
+  color: #888;
+  font-size: 16px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.register-footer {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.register-footer p {
+  color: #888;
+  font-size: 16px;
+}
+
+.login-link {
+  color: #6b5b95;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    padding: 32px 24px;
+  }
+  
+  .register-header h1 {
+    font-size: 28px;
+  }
+}
