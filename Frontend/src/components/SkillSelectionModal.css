@@ -17,10 +17,13 @@
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     width: 90%;
-    max-width: 800px;
-    max-height: 90vh;
+    max-width: 900px;
+    height: 85vh;
+    max-height: 85vh;
     overflow-y: auto;
     animation: slideIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
 .skill-modal-header {
@@ -62,6 +65,8 @@
 
 .skill-modal-body {
     padding: 32px;
+    flex: 1;
+    overflow-y: auto;
 }
 
 .category-section,
@@ -94,57 +99,47 @@
 }
 
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 8px;
-    max-height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-height: 400px;
     overflow-y: auto;
     border: 1px solid #eee;
     border-radius: 6px;
-    padding: 12px;
+    padding: 16px;
 }
 
 .skill-item {
-    padding: 8px 12px;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-    font-size: 13px;
     cursor: pointer;
     transition: all 0.2s ease;
-    text-align: center;
     user-select: none;
 }
 
 .skill-item:hover {
-    background: #e9ecef;
-    border-color: #6b5b95;
+    transform: translateY(-2px);
 }
 
 .skill-item.selected {
-    background: #6b5b95;
-    color: white;
-    border-color: #6b5b95;
+    opacity: 0.5;
+    pointer-events: none;
 }
 
+
+
 .selected-skills-grid {
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
     border: 1px solid #eee;
     border-radius: 6px;
-    padding: 12px;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .selected-skill-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    font-size: 13px;
+    position: relative;
+    display: inline-block;
 }
 
 .selected-skill-item:last-child {
@@ -152,24 +147,26 @@
 }
 
 .remove-skill {
-    background: none;
-    border: none;
-    color: #dc3545;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 0;
+    position: absolute;
+    top: -8px;
+    right: -8px;
     width: 20px;
     height: 20px;
+    border-radius: 50%;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    transition: all 0.2s ease;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
-.remove-skill:hover {
-    background: #dc3545;
-    color: white;
+.selected-skill-item:hover .remove-skill {
+    opacity: 1;
 }
 
 .loading {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import Input from './Input';
 import Select from './Select';
+import SkillTag from './SkillTag';
 import './SkillSelectionModal.css';
 
 const SkillSelectionModal = ({ isOpen, onClose, onSave, existingSkills = [], title = "Select Skills" }) => {
@@ -10,6 +11,7 @@ const SkillSelectionModal = ({ isOpen, onClose, onSave, existingSkills = [], tit
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [availableSkills, setAvailableSkills] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [allSkills, setAllSkills] = useState([]);
 
     // Categories for skills
     const categories = [
@@ -80,6 +82,10 @@ const SkillSelectionModal = ({ isOpen, onClose, onSave, existingSkills = [], tit
     useEffect(() => {
         if (isOpen) {
             setSelectedSkills([...existingSkills]);
+            // Load all skills when modal opens
+            const allSkillsList = Object.values(skillsDatabase).flat();
+            setAllSkills(allSkillsList);
+            setAvailableSkills(allSkillsList);
         }
     }, [isOpen, existingSkills]);
 
@@ -94,9 +100,10 @@ const SkillSelectionModal = ({ isOpen, onClose, onSave, existingSkills = [], tit
                 setIsLoading(false);
             }, 300);
         } else {
-            setAvailableSkills([]);
+            // Show all skills when no category is selected
+            setAvailableSkills(allSkills);
         }
-    }, [selectedCategory]);
+    }, [selectedCategory, allSkills]);
 
     const filteredSkills = availableSkills.filter(skill =>
         skill.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -143,72 +150,68 @@ const SkillSelectionModal = ({ isOpen, onClose, onSave, existingSkills = [], tit
 
                 <div className="skill-modal-body">
                     <div className="category-section">
-                        <label>Select Category</label>
+                        <label>Select Category (Optional)</label>
                         <Select
                             value={selectedCategory}
                             onChange={setSelectedCategory}
                             options={categories}
-                            placeholder="Choose a category"
+                            placeholder="Choose a category or search all skills"
                         />
                     </div>
 
-                    {selectedCategory && (
-                        <>
-                            <div className="search-section">
-                                <label>Search Skills</label>
-                                <Input
-                                    type="text"
-                                    placeholder="Search skills in this category..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                />
-                            </div>
+                    <div className="search-section">
+                        <label>Search Skills</label>
+                        <Input
+                            type="text"
+                            placeholder={selectedCategory ? `Search skills in ${selectedCategory}...` : "Search all skills..."}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </div>
 
-                            <div className="skills-content">
-                                <div className="available-skills">
-                                    <h3>Available Skills</h3>
-                                    {isLoading ? (
-                                        <div className="loading">Loading skills...</div>
-                                    ) : (
-                                        <div className="skills-grid">
-                                            {filteredSkills.map((skill, index) => (
-                                                <div
-                                                    key={index}
-                                                    className={`skill-item ${selectedSkills.includes(skill) ? 'selected' : ''}`}
-                                                    onClick={() => handleSkillToggle(skill)}
-                                                >
-                                                    {skill}
-                                                </div>
-                                            ))}
-                                            {filteredSkills.length === 0 && searchQuery && (
-                                                <div className="no-results">No skills found matching "{searchQuery}"</div>
-                                            )}
+                    <div className="skills-content">
+                        <div className="available-skills">
+                            <h3>Available Skills</h3>
+                            {isLoading ? (
+                                <div className="loading">Loading skills...</div>
+                            ) : (
+                                <div className="skills-grid">
+                                    {filteredSkills.map((skill, index) => (
+                                        <div
+                                            key={index}
+                                            className={`skill-item ${selectedSkills.includes(skill) ? 'selected' : ''}`}
+                                            onClick={() => handleSkillToggle(skill)}
+                                        >
+                                            <SkillTag skill={skill} />
                                         </div>
+                                    ))}
+                                    {filteredSkills.length === 0 && searchQuery && (
+                                        <div className="no-results">No skills found matching "{searchQuery}"</div>
                                     )}
                                 </div>
+                            )}
+                        </div>
 
-                                <div className="selected-skills">
-                                    <h3>Selected Skills ({selectedSkills.length})</h3>
-                                    <div className="selected-skills-grid">
-                                        {selectedSkills.map((skill, index) => (
-                                            <div key={index} className="selected-skill-item">
-                                                <span>{skill}</span>
-                                                <button
-                                                    className="remove-skill"
-                                                    onClick={() => handleRemoveSkill(skill)}
-                                                >
-                                                    ×
-                                                </button>
-                                            </div>
-                                        ))}
-                                        {selectedSkills.length === 0 && (
-                                            <div className="no-selected">No skills selected</div>
-                                        )}
+                        <div className="selected-skills">
+                            <h3>Selected Skills ({selectedSkills.length})</h3>
+                            <div className="selected-skills-grid">
+                                {selectedSkills.map((skill, index) => (
+                                    <div key={index} className="selected-skill-item">
+                                        <SkillTag skill={skill} />
+                                        <button
+                                            className="remove-skill"
+                                            onClick={() => handleRemoveSkill(skill)}
+                                        >
+                                            ×
+                                        </button>
                                     </div>
-                                </div>
+                                ))}
+                                {selectedSkills.length === 0 && (
+                                    <div className="no-selected">No skills selected</div>
+                                )}
                             </div>
-                        </>
-                    )}
+                        </div>
+                    </div>
                 </div>
 
                 <div className="skill-modal-footer">
