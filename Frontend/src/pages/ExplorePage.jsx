@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
@@ -7,6 +6,7 @@ import PersonCard from '../components/PersonCard';
 import RequestModal from '../components/RequestModal';
 import ProfileModal from '../components/ProfileModal';
 import SkillFilter from '../components/SkillFilter';
+import defaultAvatar from '../assets/user_img.png';
 import './ExplorePage.css';
 
 const ExplorePage = () => {
@@ -32,7 +32,7 @@ const ExplorePage = () => {
     {
       id: 1,
       name: 'Sophia Carter',
-      image: '../assets/6833605.png',
+      image: defaultAvatar,
       skills: ['Graphic Design', 'UI/UX Design'],
       seeking: ['Web Development', 'Data Analysis'],
       availability: 'Weekends',
@@ -41,7 +41,7 @@ const ExplorePage = () => {
     {
       id: 2,
       name: 'Ethan Bennett',
-      image: '../assets/6833605.png',
+      image: defaultAvatar,
       skills: ['Web Development', 'Mobile App Development'],
       seeking: ['Photography', 'Video Editing'],
       availability: 'Evenings',
@@ -50,7 +50,7 @@ const ExplorePage = () => {
     {
       id: 3,
       name: 'Olivia Hayes',
-      image: '../assets/6833605.png',
+      image: defaultAvatar,
       skills: ['Content Writing', 'Copywriting'],
       seeking: ['Digital Marketing', 'SEO'],
       availability: 'Weekdays',
@@ -59,7 +59,7 @@ const ExplorePage = () => {
     {
       id: 4,
       name: 'Liam Foster',
-      image: '../assets/6833605.png',
+      image: defaultAvatar,
       skills: ['Photography', 'Video Editing'],
       seeking: ['Graphic Design', 'UI/UX Design'],
       availability: 'Flexible',
@@ -68,7 +68,7 @@ const ExplorePage = () => {
     {
       id: 5,
       name: 'Ava Mitchell',
-      image: '../assets/6833605.png',
+      image: defaultAvatar,
       skills: ['Digital Marketing', 'SEO'],
       seeking: ['Content Writing', 'Copywriting'],
       availability: 'Weekends',

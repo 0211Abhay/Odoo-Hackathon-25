@@ -48,7 +48,7 @@ const Header = ({ showNavigation = false }) => {
               </div>
               <button className="notification-btn">🔔</button>
               <div className="user-avatar" onClick={() => navigate('/profile')}>
-                <img src="../assets/6833605.png" alt="User" />
+                <img src="../assets/user_img.png" alt="User" />
               </div>
             </div>
           </>
