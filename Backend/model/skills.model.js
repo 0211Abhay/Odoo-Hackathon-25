@@ -27,17 +27,16 @@ module.exports = function model(sequelize) {
     skill_name: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: true,
     },
 
     /**
      * Tag of the skill.
      * Must be unique and not null.
      */
-        skill_name: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
+    tag: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
   };
 
   // Model options
