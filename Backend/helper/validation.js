@@ -2,7 +2,7 @@ const { check } = require('express-validator');
 
 exports.signUpValidation = [
 
-    check('full_name', "Name Is Required").not().isEmpty(),
+    check('username', "Name Is Required").not().isEmpty(),
     check('email', "Please Enter Valid Email").isEmail().normalizeEmail({ gmail_remove_dots: true }),
     check('password', "Password Is Required").isLength({ min: 6 }),
     // check('image').custom((value, { req }) => {

@@ -19,17 +19,27 @@ function model(sequelize) {
         },
         username: {
             type: DataTypes.STRING(50),
-            allowNull: false
-            // unique constraint moved to indexes below
+            allowNull: false,
+            unique: true, // Recommended for clarity
+            validate: {
+                notEmpty: true
+            }
         },
         email: {
             type: DataTypes.STRING(100),
-            allowNull: false
-            // unique constraint moved to indexes below
+            allowNull: false,
+            unique: true, // Recommended for clarity
+            validate: {
+                notEmpty: true,
+                isEmail: true
+            }
         },
         password_hash: {
             type: DataTypes.STRING(255),
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
         },
         joining_date: {
             type: DataTypes.DATE,
