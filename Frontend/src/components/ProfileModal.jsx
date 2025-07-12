@@ -14,19 +14,19 @@ const ProfileModal = ({ isOpen, onClose, user, onRequestSwap }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="profile-modal slide-in" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
+    <div className="profile-modal-overlay" onClick={onClose}>
+      <div className="profile-modal" onClick={e => e.stopPropagation()}>
+        <div className="profile-modal-header">
           <h2>Profile Details</h2>
           <button className="close-button" onClick={onClose}>×</button>
         </div>
 
-        <div className="modal-content">
+        <div className="profile-modal-body">
           <div className="profile-header">
-            <Avatar 
-              src={user.image} 
-              alt={user.name} 
-              size="large" 
+            <Avatar
+              src={user.image}
+              alt={user.name}
+              size="large"
             />
             <div className="profile-info">
               <h3>{user.name}</h3>
@@ -59,7 +59,7 @@ const ProfileModal = ({ isOpen, onClose, user, onRequestSwap }) => {
             </div>
           )}
 
-          <div className="modal-actions">
+          <div className="profile-modal-footer">
             <Button variant="secondary" onClick={onClose}>
               Close
             </Button>
