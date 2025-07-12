@@ -1,5 +1,5 @@
 const express = require('express');
-const userController = require("../controller/user.controller");
+const userController = require("../controller/user_profile.controller");
 const user_route = express();
 
 user_route.set('view engine', 'ejs');

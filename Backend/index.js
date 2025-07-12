@@ -16,8 +16,8 @@ const dbConfig = require("./config/db.config");
 const db = require("./helper/db.helper");
 
 // Routes
-// const webRouter = require("./routes/web.routes");
-// const userRouter = require("./routes/user.routes");
+const webRouter = require("./routes/webRoutes.routes");
+const userRouter = require("./routes/user_profile.routes");
 // const leadRouter = require("./routes/leads.routes");
 // const followupRouter = require("./routes/followup.routes");
 // const taskRouter = require("./routes/tasks.routes");
@@ -58,9 +58,9 @@ app.use(
 // app.use(passport.session());
 
 // Route middlewares
-// app.use("/", webRouter);
+app.use("/", webRouter);
 // app.use("/auth", authRoute.router);
-// app.use("/api/user", userRouter);
+app.use("/api/user", userRouter);
 // app.use("/api/lead", leadRouter);
 // app.use("/api/followup", followupRouter);
 // app.use("/api/task", taskRouter);
