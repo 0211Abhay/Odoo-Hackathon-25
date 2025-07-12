@@ -18,7 +18,7 @@ const EditProfilePage = () => {
     location: 'San Francisco, CA',
     bio: 'Passionate designer with 5+ years of experience in creating beautiful user interfaces and brand identities.',
     availability: 'Weekends and evenings',
-    profileImage: '/lovable-uploads/f8712c35-5168-401c-b0c0-c235f3d4cd57.png'
+    profileImage: '../assets/6833605.png'
   });
 
   const [offeredSkills, setOfferedSkills] = useState([
