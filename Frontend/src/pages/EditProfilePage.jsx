@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -36,6 +35,8 @@ const EditProfilePage = () => {
     'Copywriting',
     'Marketing Strategy'
   ]);
+
+  const [allSkills, setAllSkills] = useState([]);
 
   const [showOfferedSkillsModal, setShowOfferedSkillsModal] = useState(false);
   const [showWantedSkillsModal, setShowWantedSkillsModal] = useState(false);
@@ -76,8 +77,13 @@ const EditProfilePage = () => {
         setOfferedSkills((data.offeredSkills || []).map(s => s.skill_name));
         setWantedSkills((data.wantedSkills || []).map(s => s.skill_name));
       });
-    // Fetch all skills for modal (optional, if needed)
-    // fetch('/api/user/skills').then(...)
+    // Fetch all skills for modal
+    fetch('/api/user/skills')
+      .then(res => res.json())
+      .then(data => {
+        console.log('Fetched allSkills from API:', data);
+        setAllSkills(data || []);
+      });
   }, []);
 
   const handleInputChange = (e) => {
@@ -145,6 +151,12 @@ const EditProfilePage = () => {
   const handleCancel = () => {
     navigate('/profile');
   };
+
+  const skillsByCategory = allSkills.reduce((acc, skill) => {
+    acc[skill.tag] = acc[skill.tag] || [];
+    acc[skill.tag].push(skill);
+    return acc;
+  }, {});
 
   return (
     <div className="edit-profile-page">
@@ -299,6 +311,7 @@ const EditProfilePage = () => {
         onClose={() => setShowOfferedSkillsModal(false)}
         onSave={handleOfferedSkillsSave}
         existingSkills={offeredSkills}
+        allSkills={allSkills}
         title="Select Skills to Offer"
       />
 
@@ -307,6 +320,7 @@ const EditProfilePage = () => {
         onClose={() => setShowWantedSkillsModal(false)}
         onSave={handleWantedSkillsSave}
         existingSkills={wantedSkills}
+        allSkills={allSkills}
         title="Select Skills to Learn"
       />
     </div>

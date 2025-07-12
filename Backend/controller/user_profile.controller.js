@@ -313,10 +313,15 @@ const updateUserSkills = async (req, res) => {
  * Get all available skills
  */
 const getAllSkills = async (req, res) => {
+  console.log('[getAllSkills] Called');
   try {
+    console.log('[getAllSkills] Fetching skills from DB...');
     const skills = await Skills.findAll({ attributes: ["skill_id", "skill_name", "tag"] });
+    console.log(`[getAllSkills] Fetched ${skills.length} skills:`, skills.map(s => s.dataValues));
     res.status(200).json(skills);
+    console.log('[getAllSkills] Response sent successfully');
   } catch (error) {
+    console.error('[getAllSkills] Error:', error);
     res.status(400).json({ message: error.message });
   }
 };
