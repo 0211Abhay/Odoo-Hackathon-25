@@ -8,6 +8,7 @@ import Select from '../components/Select';
 import Avatar from '../components/Avatar';
 import SkillTag from '../components/SkillTag';
 import SkillSelectionModal from '../components/SkillSelectionModal';
+import defaultAvatar from '../assets/user_img.png';
 import './EditProfilePage.css';
 
 const EditProfilePage = () => {
@@ -18,7 +19,7 @@ const EditProfilePage = () => {
     location: 'San Francisco, CA',
     bio: 'Passionate designer with 5+ years of experience in creating beautiful user interfaces and brand identities.',
     availability: 'Weekends and evenings',
-    profileImage: '../assets/6833605.png'
+    profileImage: defaultAvatar
   });
 
   const [offeredSkills, setOfferedSkills] = useState([
