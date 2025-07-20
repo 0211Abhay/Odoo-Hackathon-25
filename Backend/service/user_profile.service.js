@@ -39,7 +39,7 @@ class UserService {
     });
 
     const mailSubject = "Verification Email From Skill Swap";
-    const content = `<p>Hello ${userData.name}, Please <a href="http://127.0.0.1:3000/mail_verification?token=${randomToken}">Verify</a> your email address.</p>`;
+    const content = `<p>Hello ${userData.username}, Please <a href="http://127.0.0.1:3000/mail_verification?token=${randomToken}">Verify</a> your email address.</p>`;
     await sendMail(userData.email, mailSubject, content);
 
     return credentials;

@@ -4,8 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const path = require("path");
-const cookieParser = require('cookie-parser');
-
+const cookieParser = require("cookie-parser");
 
 // const passport = require("passport");
 const cookieSession = require("cookie-session");
@@ -36,7 +35,7 @@ app.use("/public", express.static(path.join(__dirname, "public/")));
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: "http://10.80.7.90:5173", // frontend URL
     credentials: true,
   })
 );
